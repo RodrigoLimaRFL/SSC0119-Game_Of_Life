@@ -57,7 +57,7 @@ teste
 <li> Karl Cruz Altenhofen - https://github.com/KarlCruzAltenhofen </li>
 <li> Maicon Chaves Marques - https://github.com/MaiconChavesMarques </li>
 <li> Rodrigo de Freitas Lima - https://github.com/RodrigoLimaRFL </li>
-<li> Didrick Chancel - https://github.com/ </li>
+<li> Didrick Chancel Egnina Ndombi - https://github.com/LORDENDC </li>
 
 <h2>Professor:</h2>
 
