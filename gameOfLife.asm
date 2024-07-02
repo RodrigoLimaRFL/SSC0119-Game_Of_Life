@@ -1,3 +1,9 @@
+;
+; Karl Cruz Altenhofen - 14585976
+; Maicon Chaves Marques - 14593530
+; Rodrigo de Freitas Lima - 12547510
+;
+
 jmp main
 
 ; matriz com 1200 posicoes (40x30)
@@ -16,6 +22,7 @@ celula_atual: var #1 ; posicao da celula sendo verificada
 contador_ao_redor: var #1 
 
 main:
+
     loadn r0, #matrix ; r0 <- matriz [30][40]
     store matrix_pos_inicial, r0
     loadn r1, #'*' ; char vazio a ser printado
@@ -36,7 +43,6 @@ main:
     main_loop:
         call gameCycle
         call printMat
-        breakp
         jmp main_loop
     jmp fim
     
