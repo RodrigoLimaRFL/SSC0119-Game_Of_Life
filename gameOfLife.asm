@@ -4,111 +4,167 @@ jmp main
 matrix: var #1200 ; matriz 30 x 40
 matrix_ao_redor: var #1200 ; salva o num de celulas ao redor
 
-;;; Game loop n funciona
+matrix_pos_inicial: var #4 ; salva a primeira posicao
+matrix_ao_redor_pos_inicial: var #4
+
+celula_viva: var #1 ; char da celula viva (O)
+celula_morta: var #1 ; char da celula morta (*)
+
+max_tamanho: var #1 ; tamanho maximo da matriz
+
+celula_atual: var #1 ; posicao da celula sendo verificada
+contador_ao_redor: var #1 
 
 main:
 	loadn r0, #matrix ; r0 <- matriz [30][40]
-   ;loadn r1, #'*' ; char vazio a ser printado
+	store matrix_pos_inicial, r0
+    loadn r1, #'*' ; char vazio a ser printado
+    loadn r2, #2048 ; cor cinza
+    add r1, r1, r2
+    store celula_morta, r1
     loadn r2, #1200 ; tamanho da matriz
-    ;loadn r5, #'O' ; celula viva
+    store max_tamanho, r2
+    loadn r5, #'O' ; celula viva
+    loadn r2, #2816 ; cor amarela
+    add r5, r5, r2
+    store celula_viva, r5
     loadn r7, #matrix_ao_redor
+    store matrix_ao_redor_pos_inicial, r7
 	call fillMem
-	call gameCycle
 	call printMat
+	main_loop:
+		call gameCycle
+		call printMat
+		breakp
+		jmp main_loop
 	jmp fim
 	
 countCellsInc:
-	inc r3 ; r3++
+	load r1, contador_ao_redor
+	inc r1; contador++
+	store contador_ao_redor, r1
 	rts
 	
 countCells:
-	loadn r3, #0 ; r3 = num celulas ao redor
-	loadi r4, r0 ; r4 recebe a celula atual da matriz
+	loadn r1, #0
+	store contador_ao_redor, r1
+	load r2, max_tamanho
+	load r5, celula_viva
+	load r3, matrix_pos_inicial
+	
+	load r0, celula_atual
+	loadn r6, #36
+	cmp r0, r6
+	jne pular_bpt
+	
+	pular_bpt:
 	
 	; para acessar as celulas ao redor => ((posicao atual + offset) + 1200 ) % 1200
 	; celula topo esq
-	push r4 ; salva a celula atual na stack
-	loadn r6, #1169
-	add r4, r4, r6
-	mod r4, r4, r2
-	cmp r4, r5
+	load r0, celula_atual ; carrega a celula atual
+	loadn r6, #1159
+	add r0, r0, r6 ; r0 = posicao atual + offset + 1200
+	mod r0, r0, r2 ; r0 = r0 % 1200
+	add r0, r3, r0 ; pega a posicao desejada da matriz
+	loadi r0, r0 ; carrega o caractere da matriz
+	cmp r0, r5 ; se a celula esta viva, entra na funcao
 	ceq countCellsInc
-	pop r4 ; retorna o valor original
 	
 	; celula topo meio
-	push r4
-	loadn r6, #1170
-	add r4, r4, r6
-	mod r4, r4, r2
-	cmp r4, r5
+	load r0, celula_atual
+	loadn r6, #1160
+	add r0, r0, r6
+	mod r0, r0, r2
+	add r0, r3, r0
+	loadi r0, r0
+	cmp r0, r5
 	ceq countCellsInc
-	pop r4
 	
 	; celula topo dir
-	push r4
-	loadn r6, #1171
-	add r4, r4, r6
-	mod r4, r4, r2
-	cmp r4, r5
+	load r0, celula_atual
+	loadn r6, #1161
+	add r0, r0, r6
+	mod r0, r0, r2
+	add r0, r3, r0
+	loadi r0, r0
+	cmp r0, r5
 	ceq countCellsInc
-	pop r4
 	
 	; celula esq
-	push r4
+	load r0, celula_atual
 	loadn r6, #1199
-	add r4, r4, r6
-	mod r4, r4, r2
-	cmp r4, r5
+	add r0, r0, r6
+	mod r0, r0, r2
+	add r0, r3, r0
+	loadi r0, r0
+	cmp r0, r5
 	ceq countCellsInc
-	pop r4
 	
 	; celula dir
-	push r4
+	load r0, celula_atual
 	loadn r6, #1201
-	add r4, r4, r6
-	mod r4, r4, r2
-	cmp r4, r5
+	add r0, r0, r6
+	mod r0, r0, r2
+	add r0, r3, r0
+	loadi r0, r0
+	cmp r0, r5
 	ceq countCellsInc
-	pop r4
 	
 	; celula baixo esq
-	push r4
-	loadn r6, #1229
-	add r4, r4, r6
-	mod r4, r4, r2
-	cmp r4, r5
+	load r0, celula_atual
+	loadn r6, #1239
+	add r0, r0, r6
+	mod r0, r0, r2
+	add r0, r3, r0
+	loadi r0, r0
+	cmp r0, r5
 	ceq countCellsInc
-	pop r4
 	
 	; celula baixo meio
-	push r4
-	loadn r6, #1230
-	add r4, r4, r6
-	mod r4, r4, r2
-	cmp r4, r5
+	load r0, celula_atual
+	loadn r6, #1240
+	add r0, r0, r6
+	mod r0, r0, r2
+	add r0, r3, r0
+	loadi r0, r0
+	cmp r0, r5
 	ceq countCellsInc
-	pop r4
 	
 	; celula baixo dir
-	push r4
-	loadn r6, #1231
-	add r4, r4, r6
-	mod r4, r4, r2
-	cmp r4, r5
+	load r0, celula_atual
+	loadn r6, #1241
+	add r0, r0, r6
+	mod r0, r0, r2
+	add r0, r3, r0
+	loadi r0, r0
+	cmp r0, r5
 	ceq countCellsInc
-	pop r4
 	
-	loadi r7, r3 ; salva a qntd de celulas na matriz
+	load r0, celula_atual
+	load r3, matrix_ao_redor_pos_inicial
+	add r3, r3, r0 ; r0 = *matrix_ao_redor + posAtual
+	storei r3, r1 ; salva a qntd de celulas na matriz
 	rts
 	
-	
+
+;;;;;;;;;;; n ta matando e reproduzindo
 killCell: ; salva o valor morto na matriz
-	loadi r0, r2
+	load r5, matrix_pos_inicial
+	load r4, celula_atual
+	add r5, r5, r4
+	load r6, celula_morta
+	;loadi r6, r6
+	storei r5, r6
 	rts
 	
 	
 reproduceCell: ; salva o valor vivo na matriz
-	loadi r0, r5
+	load r5, matrix_pos_inicial
+	load r4, celula_atual
+	add r5, r5, r4
+	load r6, celula_viva
+	;loadi r6, r6
+	storei r5, r6
 	rts
 	
 	
@@ -120,88 +176,130 @@ liveCell:
 	
 underPop:
 	loadn r6, #2 ; se a celula tem menos que 2 vizinhos morre
-	cmp r7, r6
+	load r3, matrix_ao_redor_pos_inicial
+	load r4, celula_atual
+	add r3, r3, r4
+	loadi r3, r3
+	cmp r3, r6
 	cle killCell
 	rts
 	
 	
 overPop:
 	loadn r6, #3 ; se a celula tem mais que 3 vizinhos morre
-	cmp r7, r6
+	load r3, matrix_ao_redor_pos_inicial
+	load r4, celula_atual
+	add r3, r3, r4
+	loadi r3, r3
+	cmp r3, r6
 	cgr killCell
 	rts
 	
 	
 deadCell:
 	loadn r6, #3 ; se a celula tem exatamente 3 vizinho ela nasce
-	cmp r7, r6
+	load r3, matrix_ao_redor_pos_inicial
+	load r4, celula_atual
+	add r3, r3, r4
+	loadi r3, r3
+	cmp r3, r6
 	ceq reproduceCell
 	rts
 	
 
 ; simulates one tick of the game
 gameCycle:
+	loadn r7, #0
 	gameCycleLoop:
+		store celula_atual, r7
 		call countCells
-		cmp r0, r1 ; se a celula esta morta
-		ceq deadCell
-		cmp r0, r5 ; se a celula esta viva
-		ceq liveCell
-		loadi r4, r0
-		inc r0
 		inc r7
-		cmp r0, r2
+		load r2, max_tamanho
+		cmp r7, r2
 		jle gameCycleLoop
 		
-	loadn r4, #1200 ; volta as matrizes para o inicio
-	sub r0, r0, r4
-	sub r7, r7, r4
+	loadn r7, #0
+	
+	; for i = 0 to max_tamanho ( verifica se deve matar ou reviver )
+	gameCycleTransformCells:
+		store celula_atual, r7
+		load r0, matrix_pos_inicial
+		add r0, r0, r7
+		loadi r0, r0
+		load r2, celula_morta
+		cmp r0, r2 ; se a celula esta morta
+		ceq deadCell
+		load r2, celula_viva
+		cmp r0, r2 ; se a celula esta viva
+		ceq liveCell
+		inc r7
+		load r2, max_tamanho
+		cmp r7, r2
+		jle gameCycleTransformCells
+
 	rts
 
 fillMem:
-	push r0
-	push r2
-	loadn r1, #'*' ; char vazio a ser printado
-	loadn r5, #'O' ; celula viva
-	loadn r4, #30
+	load r0, matrix_pos_inicial
+	load r2, max_tamanho
+	load r1, celula_morta ; char vazio a ser printado
+	load r5, celula_viva ; celula viva
+	loadn r4, #5
+	loadn r6, #0
 	sub r2, r2, r4
-	
+		
 	fillMemLoop:
 		;guarda o char r1 em r0
 		storei r0, r1
 		;aumenta a posicao na mem
 		inc r0
-		cmp r0, r2
-		;if (r0 < r2) continue
+		inc r6
+		cmp r6, r2
+		;if (r6 < r2) continue
 		jle fillMemLoop
 		
-	pop r2
+	add r2, r2, r4
+		
 	fillMemLoopDois:
 		;guarda o char r1 em r0
 		storei r0, r5
 		;aumenta a posicao na mem
 		inc r0
-		cmp r0, r2
+		inc r6
+		cmp r6, r2
 		;if (r0 < r2) continue
 		jle fillMemLoopDois
 		
-	;devolve a matriz
-	pop r0
-	push r0
 	jmp printMat
 	rts
 
 printMat: 
+	load r0, matrix_pos_inicial
+	load r2, max_tamanho
 	loadn r4, #0
 	printMatLoop:
 		loadi r3, r0 ; carrega a mem no r3
 		outchar r3, r4
 		inc r0
 		inc r4
-		cmp r0, r2
+		cmp r4, r2
 		jle printMatLoop
 
-	pop r0
+	rts
+	
+printMatQntd:
+	load r7, matrix_ao_redor_pos_inicial
+	loadn r4, #0
+	printMatLoopQntd:
+		loadi r3, r7 ; carrega a mem no r3
+		loadn r5, #48
+		add r3, r3, r5
+		outchar r3, r4
+		inc r4
+		inc r7
+		cmp r4, r2
+		jle printMatLoopQntd
+
 	rts
 
 fim:
