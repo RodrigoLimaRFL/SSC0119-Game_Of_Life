@@ -111,7 +111,6 @@ Utilizamos o teste.asm programa padrão de testes para verificar o funcionamento
 #### Teste no teste.asm
 
  ```c
-	; Teste do Add
 	loadn r1, #'E'
 	loadn r2, #1
 	add r3, r1, r2
