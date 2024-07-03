@@ -2,7 +2,7 @@
 Jogo...
 
 ## Vídeo do jogo:
-Youtube:
+Youtube: https://youtu.be/WgHUHPlJETs?si=DQC0SQZj_8xW6hn-
 
 ## A nova instrução para o processador:
 A nova instrução implementada é a função de hold, que segura o processador por um determinado numero de ciclos de clock. A instrução se mantém no estado de decodificação até que uma varável secundaria atinga o valor passado no registrador, passar o valor 1000 no registrador, implica em fazer 65.536 decodificações 1000 vezes antes de seguir para a próxima instrução.
@@ -119,6 +119,9 @@ Utilizamos o teste.asm programa padrão de testes para verificar o funcionamento
 	loadn r0, #10
 	outchar r3, r0		; Printa F na linha 10
 ```
+
+## Vídeo sobre a instrução:
+Youtube: https://youtu.be/WgHUHPlJETs?si=DQC0SQZj_8xW6hn-
 
 <h2>Membros:</h2>
 
