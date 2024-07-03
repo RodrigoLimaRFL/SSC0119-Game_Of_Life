@@ -137,7 +137,7 @@ Utilizamos o teste.asm programa padrão de testes para verificar o funcionamento
 ```
 
 ## Vídeo sobre a instrução:
-Youtube: https://youtu.be/WgHUHPlJETs?si=DQC0SQZj_8xW6hn-
+Youtube: [https://youtu.be/WgHUHPlJETs?si=DQC0SQZj_8xW6hn-](https://youtu.be/Y6JFilbcJbU)
 
 <h2>Membros:</h2>
 
