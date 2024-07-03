@@ -5,7 +5,7 @@ Jogo...
 Youtube:
 
 ## A nova instrução para o processador:
-A nova função
+A nova instrução implementada é a função de hold, que segura o processador por um determinado numero de ciclos de clock. A instrução se mantém no estado de decodificação até que uma varável secundaria atinga o valor passado no registrador, passar o valor 1000 no registrador, implica em fazer 65.536 decodificações 1000 vezes antes de seguir para a próxima instrução.
 
 ### Mudanças feitas em VHDL para implementação
 
@@ -99,16 +99,27 @@ Isso ira gerar um arquivo ".mif"
  #### Execução
  
  Para a execução precisa seguir seguintes passos.
- 
+
+ - Renomear o arquivo "xxxxx.mif" para "cpuram.mif"
+ - Copiar o arquivo ".mif" para pasta do quartus e substituir o que já existe lá
  - Compilar e executar o programa no FPGA.
 
 ### Teste da instrução
 
-Teste
+Utilizamos o teste.asm programa padrão de testes para verificar o funcionamento da nova instrução implementada. Colocamos a instrução entre a letra E e a letra F.
 
 #### Teste no teste.asm
 
-teste
+ ```c
+	; Teste do Add
+	loadn r1, #'E'
+	loadn r2, #1
+	add r3, r1, r2
+	loadn r0, #1000
+	hold r0
+	loadn r0, #10
+	outchar r3, r0		; Printa F na linha 10
+```
 
 <h2>Membros:</h2>
 
