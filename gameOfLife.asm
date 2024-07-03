@@ -16,6 +16,9 @@ matrix_ao_redor_pos_inicial: var #4
 celula_viva: var #1 ; char da celula viva (O)
 celula_morta: var #1 ; char da celula morta (*)
 
+celula_anterior: var #1 ; a celula selecionada no pause
+posicao: var #4
+
 max_tamanho: var #1 ; tamanho maximo da matriz
 
 celula_atual: var #1 ; posicao da celula sendo verificada
@@ -39,10 +42,24 @@ main:
     store matrix_ao_redor_pos_inicial, r7
     call fillMem
     call printMat
+    main_pauseAndPlay:
     call gridInitPosition
     main_loop:
         call gameCycle
         call printMat
+        
+        inchar r0
+        loadn r1, #2
+        hold r1
+        
+        loadn r1, #'p'
+        cmp r0, r1
+        jeq main_pauseAndPlay
+        
+        loadn r1, #'r'
+        cmp r0, r1
+        jeq main
+        
         jmp main_loop
     jmp fim
     
@@ -316,8 +333,7 @@ fim:
 
 
 gridInitPosition:
-    loadn r0, #0
-    celula_anterior: var #1
+    load r0, posicao
 
     gridInitPosition_loop:
         
@@ -351,6 +367,12 @@ gridInitPosition:
             inchar r1           ;input
         ;    cmp r1, r2
         ;    jeq gridInitPosition_inLoop
+        loadn r2, #1
+        hold r2
+        
+        loadn r2, #'r'
+        cmp r1, r2
+        jeq main
         
         loadn r2, #'w'
         cmp r1, r2
@@ -368,15 +390,16 @@ gridInitPosition:
         cmp r1, r2
         jeq gridInitPosition_right
         
-        loadn r2, #'f'
+        loadn r2, #' '
         cmp r1, r2
         jeq gridInitPosition_switch
         
-        loadn r2, #'g'
+        loadn r2, #'p'
         cmp r1, r2
         jne gridInitPosition_loop
         load r1, celula_anterior   ;r1 recebe char anterior
         outchar r1, r0              ;imprime char cinza
+        store posicao, r0
         rts
         
 gridInitPosition_up:
@@ -441,11 +464,12 @@ gridInitPosition_right:
     loadn r2, #0
     cmp r1, r2
     jne gridInitPosition_loop
-    loadn r2, #40
-    sub r0, r0, r2 ;r0 = r0 - 40
     loadn r2, #1200
-    add r0, r0, r2
-    mod r0, r0, r2  ;(r0 % 1200)
+    add r0, r0, r2  ;r0 + 1200
+    loadn r2, #40
+    sub r0, r0, r2  ;r0 - 40
+    loadn r2, #1200
+    mod r0, r0, r2  ;r0 % 1200
     
     jmp gridInitPosition_loop
     
