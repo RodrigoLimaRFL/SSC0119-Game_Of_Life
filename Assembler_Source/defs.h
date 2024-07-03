@@ -110,7 +110,7 @@
 #define INPUT_CODE              96
 #define OUTPUT_CODE             97
 #define SOUND_CODE              98
-#define SLEEP_CODE              99 //Inclusão do código da nova instrução
+#define HOLD_CODE             99 //Inclusão do código da nova instrução
 
 /* Definicoes dos op codes (binarios em strings) */
 
@@ -139,8 +139,9 @@
 #define DIV             "100011"
 #define INC             "100100"
 #define LMOD            "100101"
-#define SLEEP           "100110" //Inclusão do binário da nova instrução
 
+/* Hold Instructions: */
+#define HOLD            "001011" //Inclusão do binário da nova instrução
 
 /* Logic Instructions (All should begin with "01"): */
 #define LAND            "010010"
@@ -211,8 +212,8 @@
 #define ADD_STR                 "ADD"
 #define ADDC_STR                "ADDC"
 
-/* SLEEP */
-#define SLEEP_STR               "SLEEP" //Inclusão do label (como aparecerá no código) a nova instrução
+/* HOLD */
+#define HOLD_STR                "HOLD" //Inclusão do label (como aparecerá no código) a nova instrução
 
 /* SUB */
 #define SUB_STR                 "SUB"

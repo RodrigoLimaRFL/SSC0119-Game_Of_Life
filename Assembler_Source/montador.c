@@ -323,7 +323,7 @@ void DetectarLabels(void)
             case SO_CODE :
             case SNO_CODE :
             case PUSH_CODE :
-	        case SLEEP_CODE: //Definindo quantos separadores e quantas linhas minha instrução vai precisar
+            case HOLD_CODE : //Definindo quantos separadores e quantas linhas minha instrução vai precisar
             case POP_CODE :
             case CALLR_CODE :
             case JMPR_CODE :
@@ -789,21 +789,17 @@ void MontarInstrucoes(void)
                     break;
 
                 /* ==============
-                   Sleep Rx                              //Definindo como a instrução deve ser montada
+                   Hold Rx                              //Definindo como a instrução deve ser montada
                    ==============
                 */
 
-                case SLEEP_CODE :
+                case HOLD_CODE :
                     str_tmp1 = parser_GetItem_s();
                     val1 = BuscaRegistrador(str_tmp1);
                     free(str_tmp1);
                     str_tmp1 = ConverteRegistrador(val1);
-                    str_tmp2 = ConverteRegistrador(val1);
-                    str_tmp3 = ConverteRegistrador(val1);
-                    sprintf(str_msg,"%s%s%s%s0",SLEEP,str_tmp1,str_tmp2,str_tmp3);
+                    sprintf(str_msg,"%s%s0000000",HOLD,str_tmp1);
                     free(str_tmp1);
-                    free(str_tmp2);
-                    free(str_tmp3);
                     parser_Write_Inst(str_msg,end_cnt);
                     end_cnt += 1;
                     break;
@@ -2363,9 +2359,9 @@ int BuscaInstrucao(char * nome)
     {
         return AND_CODE;
     }
-    else if (strcmp(str_tmp,SLEEP_STR) == 0) //Aviso que quando o programa encontrar a palavra Sleep, ele deve montar a instrução SLEEP_CODE
+        else if (strcmp(str_tmp,HOLD_STR) == 0) //Aviso que quando o programa encontrar a palavra Sleep, ele deve montar a instrução SLEEP_CODE
     {
-        return SLEEP_CODE;
+        return HOLD_CODE;
     }
     else if (strcmp(str_tmp,OR_STR) == 0)
     {
