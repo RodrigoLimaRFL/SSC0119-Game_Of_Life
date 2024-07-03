@@ -9,19 +9,74 @@ A nova função
 
 ### Mudanças feitas em VHDL para implementação
 
-Mudanças
+ ```c
+--========================================================================
+-- HOLD RX
+--========================================================================			
+			IF(IR(15 DOWNTO 10) = HOLD) THEN
+				
+				IF (l = x"FFFF") THEN
+					l(15 downto 0) :=	x"0000";
+					m := m + 1;
+				END IF;
+				IF (m = REG(RX)) THEN
+					  l(15 downto 0) :=	x"0000";  
+					  m(15 downto 0) :=	x"0000";
+					  state := fetch;
+				ELSE
+					  l := l + 1;
+					  state := decode;
+				END IF;
+					
+			END IF;		
+
+-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX	
+```
 
 ### Mudanças feitas no montador para implementação
 
-mudancas gerais
-
 #### Mudanças no def.h
 
-mudanca no def
+ ```c
+#define HOLD_CODE             99 //Inclusão do código da nova instrução
+...
+/* Hold Instructions: */
+#define HOLD            "001011" //Inclusão do binário da nova instrução
+...
+/* HOLD */
+#define HOLD_STR                "HOLD" //Inclusão do label (como aparecerá no código) a nova instrução
+```
 
 #### Mudanças no montador.c
 
-mudanca no .c
+ ```c
+            case HOLD_CODE : //Definindo quantos separadores e quantas linhas minha instrução vai precisar
+                parser_SkipUntilEnd();
+                end_cnt++;
+                break;
+...
+
+                /* ==============
+                   Hold Rx                              //Definindo como a instrução deve ser montada
+                   ==============
+                */
+
+                case HOLD_CODE :
+                    str_tmp1 = parser_GetItem_s();
+                    val1 = BuscaRegistrador(str_tmp1);
+                    free(str_tmp1);
+                    str_tmp1 = ConverteRegistrador(val1);
+                    sprintf(str_msg,"%s%s0000000",HOLD,str_tmp1);
+                    free(str_tmp1);
+                    parser_Write_Inst(str_msg,end_cnt);
+                    end_cnt += 1;
+                    break;
+...
+        else if (strcmp(str_tmp,HOLD_STR) == 0) //Aviso que quando o programa encontrar a palavra hold, ele deve montar a instrução HOLD_CODE
+    {
+        return HOLD_CODE;
+    }
+```
 
 ### Montagem e execução à partir do arquivo .asm
 
@@ -30,13 +85,16 @@ mudanca no .c
 Para a montagem, precisa compilar o programa que está na pasta Assembler_Source no gcc com seguinte comando:
 
  gcc *.c -o main
+
+ Também pode-se usar o makefile:
  
+ make
+  
  Depois disso
  
- ./main <arquivoEntrada.asm> <cpuram.mif>
+ ./montador <arquivoEntrada.asm> <cpuram.mif>
  
-cpuram.mif.
- 
+Isso ira gerar um arquivo ".mif"
  
  #### Execução
  
