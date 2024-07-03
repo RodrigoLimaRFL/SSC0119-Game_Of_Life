@@ -1,5 +1,21 @@
-# Game_Of_Life
-Jogo...
+# Game Of Life
+O Jogo da Vida é um autômato celular criado pelo matemático britânico John Horton Conway em 1970. É um jogo de zero jogadores que se desenrola em uma grade bidimensional de células, onde cada célula pode estar em um dos dois estados possíveis: viva ou morta. A evolução do jogo é determinada por seu estado inicial, não exigindo intervenção adicional de jogadores.
+
+## Regras:
+O jogo segue quatro regras simples, aplicadas a cada célula da grade para determinar seu estado na próxima geração:
+- Sobrevivência: Uma célula viva com dois ou três vizinhos vivos continua viva na próxima geração.
+- Superpopulação: Uma célula viva com mais de três vizinhos vivos morre devido à superpopulação.
+- Subpopulação: Uma célula viva com menos de dois vizinhos vivos morre devido à subpopulação.
+- Reprodução: Uma célula morta com exatamente três vizinhos vivos torna-se viva na próxima geração.
+
+## Funcionamento:
+O jogo começa com uma configuração inicial de células vivas e mortas. Em cada etapa, as regras acima são aplicadas simultaneamente a todas as células da grade, produzindo uma nova geração.
+
+O Jogo da Vida é conhecido por gerar padrões complexos e imprevisíveis a partir de regras simples, e tem sido usado para explorar conceitos em matemática, computação, biologia teórica e filosofia.
+
+## Imagens:
+
+a
 
 ## Vídeo do jogo:
 Youtube: https://youtu.be/WgHUHPlJETs?si=DQC0SQZj_8xW6hn-
