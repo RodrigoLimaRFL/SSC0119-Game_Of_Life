@@ -136,6 +136,11 @@ Utilizamos o teste.asm programa padrão de testes para verificar o funcionamento
 	outchar r3, r0		; Printa F na linha 10
 ```
 
+## VÍDEO DO PRÓPRIO SIMÕES EXPLICANDO COMO PONHA A INSTRUÇÃO (EXCELENTE):
+Drive: https://drive.google.com/file/d/14ZiytkSHrAstb9RCMEou6-iPvk4WH4sO/view
+
+Assista dos minutos 19:35 até 41:50
+
 ## Vídeo sobre a instrução:
 Youtube: [https://youtu.be/WgHUHPlJETs?si=DQC0SQZj_8xW6hn-](https://youtu.be/Y6JFilbcJbU)
 
