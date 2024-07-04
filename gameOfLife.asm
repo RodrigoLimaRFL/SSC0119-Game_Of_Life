@@ -367,7 +367,7 @@ gridInitPosition:
             inchar r1           ;input
         ;    cmp r1, r2
         ;    jeq gridInitPosition_inLoop
-        loadn r2, #1
+        loadn r2, #2
         hold r2
         
         loadn r2, #'r'
