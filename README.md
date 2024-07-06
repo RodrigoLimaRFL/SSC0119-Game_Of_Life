@@ -13,9 +13,9 @@ O jogo começa com uma configuração inicial de células vivas e mortas. Em cad
 
 O Jogo da Vida é conhecido por gerar padrões complexos e imprevisíveis a partir de regras simples, e tem sido usado para explorar conceitos em matemática, computação, biologia teórica e filosofia.
 
-## Imagens:
+## Tela:
+![Captura de tela 2024-07-05 21195487](https://github.com/RodrigoLimaRFL/SSC0119-Game_Of_Life/assets/118189820/55f93f37-f6b2-40ab-a750-10e6cf93df33)
 
-a
 
 ## Vídeo do jogo:
 Youtube: [https://youtu.be/WgHUHPlJETs?si=DQC0SQZj_8xW6hn-](https://youtu.be/qoTh68lj-lI?si=fr9gvRf6RD0YVtm_)<br />
