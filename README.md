@@ -18,7 +18,8 @@ O Jogo da Vida é conhecido por gerar padrões complexos e imprevisíveis a part
 a
 
 ## Vídeo do jogo:
-Youtube: https://youtu.be/WgHUHPlJETs?si=DQC0SQZj_8xW6hn-
+Youtube: [https://youtu.be/WgHUHPlJETs?si=DQC0SQZj_8xW6hn-](https://youtu.be/qoTh68lj-lI?si=fr9gvRf6RD0YVtm_)
+Youtube: [https://youtu.be/oHfK9R59PIU?si=KeleeTT1cal7CI4T](https://youtu.be/oHfK9R59PIU?si=fscHrUt3e2T3WfiL)
 
 ## A nova instrução para o processador:
 A nova instrução implementada é a função de hold, que segura o processador por um determinado numero de ciclos de clock. A instrução se mantém no estado de decodificação até que uma varável secundaria atinga o valor passado no registrador, passar o valor 1000 no registrador, implica em fazer 65.536 decodificações 1000 vezes antes de seguir para a próxima instrução.
