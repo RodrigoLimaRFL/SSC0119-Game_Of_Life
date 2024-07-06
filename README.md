@@ -18,7 +18,7 @@ O Jogo da Vida é conhecido por gerar padrões complexos e imprevisíveis a part
 a
 
 ## Vídeo do jogo:
-Youtube: [https://youtu.be/WgHUHPlJETs?si=DQC0SQZj_8xW6hn-](https://youtu.be/qoTh68lj-lI?si=fr9gvRf6RD0YVtm_)
+Youtube: [https://youtu.be/WgHUHPlJETs?si=DQC0SQZj_8xW6hn-](https://youtu.be/qoTh68lj-lI?si=fr9gvRf6RD0YVtm_)<br />
 Youtube: [https://youtu.be/oHfK9R59PIU?si=KeleeTT1cal7CI4T](https://youtu.be/oHfK9R59PIU?si=fscHrUt3e2T3WfiL)
 
 ## A nova instrução para o processador:
